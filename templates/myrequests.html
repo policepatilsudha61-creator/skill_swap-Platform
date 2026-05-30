@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Requests</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Skill Swap Platform</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/browse">Browse Skills</a></li>
+        <li><a href="/requests">Requests</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+<h1>My Requests</h1>
+
+{% for request in requests %}
+
+<div class="card">
+
+    <h2>{{ request[2] }}</h2>
+
+    <p>Status: {{ request[3] }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

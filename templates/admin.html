@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Skill Swap Platform</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/admin">Admin</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="dashboard">
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <h2>{{ total_users }}</h2>
+            <p>Total Users</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ total_profiles }}</h2>
+            <p>Total Profiles</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ total_requests }}</h2>
+            <p>Total Requests</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ total_feedback }}</h2>
+            <p>Total Feedback</p>
+        </div>
+
+    </div>
+
+    <h2>All Users</h2>
+
+    <table border="1" width="100%">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+        {% for user in users %}
+<tr>
+    <td>{{ user[0] }}</td>
+    <td>{{ user[1] }}</td>
+    <td>{{ user[2] }}</td>
+
+    <td>
+        <a href="/delete_user/{{ user[0] }}">
+            Delete
+        </a>
+    </td>
+</tr>
+{% endfor %}
+    </table>
+
+    <h2>All Profiles</h2>
+
+    <table border="1" width="100%">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Skill</th>
+             <th>Action</th>
+        </tr>
+{% for profile in profiles %}
+<tr>
+    <td>{{ profile[0] }}</td>
+    <td>{{ profile[1] }}</td>
+    <td>{{ profile[2] }}</td>
+
+    <td>
+        <a href="/delete_profile/{{ profile[0] }}">
+            Delete
+        </a>
+    </td>
+</tr>
+{% endfor %}
+        
+    </table>
+
+    <h2>All Requests</h2>
+
+    <table border="1" width="100%">
+        <tr>
+            <th>ID</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Status</th>
+              <th>Action</th>
+        </tr>
+
+        {% for request in requests %}
+<tr>
+    <td>{{ request[0] }}</td>
+    <td>{{ request[1] }}</td>
+    <td>{{ request[2] }}</td>
+    <td>{{ request[3] }}</td>
+
+    <td>
+        <a href="/delete_request/{{ request[0] }}">
+            Delete
+        </a>
+    </td>
+</tr>
+{% endfor %}
+    </table>
+
+<h2>All Feedback</h2>
+
+<table border="1" width="100%">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Feedback</th>
+        <th>Rating</th>
+        <th>Action</th>
+        
+    </tr>
+
+   {% for feedback in feedbacks %}
+<tr>
+    <td>{{ feedback[0] }}</td>
+    <td>{{ feedback[1] }}</td>
+    <td>{{ feedback[2] }}</td>
+    <td>{{ feedback[3] }}</td>
+
+    <td>
+        <a href="/delete_feedback/{{ feedback[0] }}">
+            Delete
+        </a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

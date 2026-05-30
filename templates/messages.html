@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messages</title>
+
+    <style>
+    body{
+        margin:0;
+        font-family:Arial;
+        background:#f4f7fc;
+    }
+
+    nav{
+        background:#0d6efd;
+        padding:15px;
+        text-align:center;
+    }
+
+    nav a{
+        color:white;
+        text-decoration:none;
+        margin:0 15px;
+        font-size:18px;
+    }
+
+    .container{
+        width:80%;
+        margin:30px auto;
+    }
+
+    h1{
+        text-align:center;
+        color:#0d6efd;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        background:white;
+        box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    th{
+        background:#0d6efd;
+        color:white;
+        padding:12px;
+    }
+
+    td{
+        padding:12px;
+        border-bottom:1px solid #ddd;
+        text-align:center;
+    }
+
+    tr:hover{
+        background:#f1f1f1;
+    }
+
+    .btn{
+        background:#0d6efd;
+        color:white;
+        padding:10px 20px;
+        text-decoration:none;
+        border-radius:5px;
+    }
+
+    footer{
+        margin-top:30px;
+        background:#0d6efd;
+        color:white;
+        text-align:center;
+        padding:15px;
+    }
+    </style>
+
+</head>
+<body>
+
+<nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/browse">Browse Skills</a>
+    <a href="/requests">Requests</a>
+    <a href="/messages">Messages</a>
+    <a href="/logout">Logout</a>
+</nav>
+
+<div class="container">
+
+    <h1>My Messages</h1>
+    <table><tr>
+    <th>Sender</th>
+    <th>Receiver</th>
+    <th>Message</th>
+    <th>Time</th>
+</tr>{% for msg in messages %}
+
+<tr>
+    <td>{{ msg[0] }}</td>
+    <td>{{ msg[1] }}</td>
+    <td>{{ msg[2] }}</td>
+    <td>{{ msg[3] }}</td>
+</tr>{% endfor %}
+
+</table></div><footer>
+    Skill Swap Platform © 2026
+</footer></body>
+</html>

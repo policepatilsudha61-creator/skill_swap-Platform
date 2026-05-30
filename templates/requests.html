@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skill Requests</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Skill Swap Platform</div>
+
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/browse">Browse Skills</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/feedback">Feedback</a></li>
+        <li><a href="/messages">Messages</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <h1>Skill Requests</h1>
+
+    {% for request in requests %}
+
+   <div class="card">
+
+    <h3>{{ request[1] }}</h3>
+
+    <p><b>Receiver:</b> {{ request[2] }}</p>
+
+    <p><b>Status:</b> {{ request[3] }}</p>
+
+    <div class="btn-group">
+        <a href="/accept/{{ request[0] }}" class="btn">
+            Accept
+        </a>
+
+        <a href="/reject/{{ request[0] }}" class="btn reject">
+            Reject
+        </a>
+        <a href="/complete/{{ request[0] }}" class="complete-btn">
+    Complete
+</a>
+{% if request[3] == 'Accepted' %}
+<a href="/send_message/{{ request[2] }}" class="btn">
+    Message
+</a>
+{% endif %}
+    </div>
+
+</div>
+        
+
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

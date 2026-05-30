@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Sessions</title>
+
+    <style>
+    body{
+        font-family: Arial, sans-serif;
+        margin:0;
+        padding:30px;
+        min-height:100vh;
+
+        background:
+        linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+        ),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3");
+
+        background-size:cover;
+        background-position:center;
+        background-attachment:fixed;
+    }
+
+    h1{
+        color:white;
+        text-align:center;
+        margin-bottom:30px;
+    }
+
+    form{
+        width:90%;
+        max-width:900px;
+        margin:auto;
+        background:white;
+        padding:20px;
+        border-radius:15px;
+    }
+
+    input, textarea{
+        width:100%;
+        padding:10px;
+        margin:8px 0;
+        box-sizing:border-box;
+    }
+
+    button{
+        background:#007bff;
+        color:white;
+        border:none;
+        padding:10px 20px;
+        border-radius:6px;
+        cursor:pointer;
+    }
+
+    .card{
+        background:white;
+        width:90%;
+        max-width:900px;
+        margin:20px auto;
+        padding:20px;
+        border-radius:15px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .join{
+        background:green;
+        color:white;
+        padding:10px 15px;
+        text-decoration:none;
+        border-radius:5px;
+    }
+
+    .session-actions{
+        margin-top:15px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .like-btn{
+        background:#28a745;
+    }
+
+    .comment-btn{
+        background:#007bff;
+    }
+
+    .share-btn{
+        background:#ff9800;
+    }
+    .live-badge{
+    background:red;
+    color:white;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.like-btn,
+.comment-btn,
+.share-btn{
+    text-decoration:none;
+    display:inline-block;
+}
+
+    .badge{
+        background:red;
+        color:white;
+        padding:5px 10px;
+        border-radius:20px;
+        font-size:12px;
+    }
+    </style>
+
+</head>
+<body>
+
+<h1>🎥 Live Skill Sessions</h1>
+
+<form method="POST">
+
+<input type="text" name="title" placeholder="Session Title" required>
+
+<input type="text" name="skill" placeholder="Skill Name" required>
+
+<textarea name="description" placeholder="Description"></textarea>
+
+<input type="url" name="meeting_link"
+placeholder="Google Meet / Zoom Link" required>
+
+<input type="datetime-local"
+name="session_time" required>
+
+<button type="submit">
+Create Session
+</button>
+
+</form>
+
+<br>
+
+{% for s in sessions %}
+
+<div class="card">
+
+{% if s[11] == 1 %}
+<span class="live-badge">🔴 LIVE NOW</span>
+{% endif %}
+
+<h3>{{ s[1] }}</h3>
+
+<p><b>Host:</b> {{ s[9] }}</p>
+
+<p><b>Skill:</b> {{ s[2] }}</p>
+
+<p>{{ s[3] }}</p>
+
+<p><b>Time:</b> {{ s[5] }}</p>
+
+<p>👍 {{ s[7] }} Likes</p>
+
+<p>👨‍🎓 {{ s[8] }} Students Joined</p>
+
+<a href="/join/{{ s[0] }}" class="join">
+Join Session
+</a>
+
+<div class="session-actions">
+
+<a href="/like/{{ s[0] }}" class="like-btn">
+👍 Like
+</a>
+
+<button class="comment-btn"
+onclick="toggleComment('{{s[0]}}')">
+💬 Comment
+</button>
+
+<button class="share-btn"
+onclick="copyLink('{{s[4]}}')">
+🔗 Share
+</button>
+
+</div>
+
+<div id="comment{{s[0]}}" style="display:none;">
+
+<form action="/comment/{{s[0]}}" method="POST">
+
+<input type="text"
+name="comment"
+placeholder="Write comment">
+
+<button type="submit">
+Post
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+{% endfor %}
+<script>
+
+function toggleComment(id){
+    let box=document.getElementById("comment"+id);
+
+    if(box.style.display=="none"){
+        box.style.display="block";
+    }else{
+        box.style.display="none";
+    }
+}
+
+function copyLink(link){
+    navigator.clipboard.writeText(link);
+    alert("Meeting link copied!");
+}
+
+</script>
+
+</body>
+</html>
