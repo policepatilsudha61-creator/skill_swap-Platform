@@ -5,15 +5,16 @@ import mysql.connector
 
 app = Flask(__name__)
 app.secret_key = "skillswap123"
-# db = mysql.connector.connect(
-#     host="localhost",
-#     user="root",
-#     password="sudha@123",
-#     database="skill_swap"
-# )
 
-# cursor = db.cursor()
 
+#db = mysql.connector.connect(
+ #   host="localhost",
+  #  user="root",
+   # password="sudha@123",
+    #database="skill_swap"
+#)
+
+#cursor = db.cursor()
 
 @app.route('/')
 def home():
